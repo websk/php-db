@@ -60,7 +60,7 @@ class DBService
      * @return \PDOStatement
      * @throws \Exception
      */
-    public function query($query, $params_arr = [])
+    public function query(string $query, array $params_arr = [])
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -82,13 +82,13 @@ class DBService
     }
 
     /**
-     * @param $query
+     * @param string $query
      * @param array $params_arr
      * @param string $field_name_for_keys
      * @return array
      * @throws \Exception
      */
-    public function readObjects($query, $params_arr = [], $field_name_for_keys = '')
+    public function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = '')
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -107,12 +107,12 @@ class DBService
     }
 
     /**
-     * @param $query
+     * @param string $query
      * @param array $params_arr
      * @return mixed
      * @throws \Exception
      */
-    public function readObject($query, $params_arr = [])
+    public function readObject(string $query, array $params_arr = [])
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -125,7 +125,7 @@ class DBService
      * @return array
      * @throws \Exception
      */
-    public function readColumn($query, $params_arr = [])
+    public function readColumn(string $query, array $params_arr = [])
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -139,12 +139,31 @@ class DBService
     }
 
     /**
-     * @param $query
+     * @param string $query
+     * @param array $params_arr
+     * @return array
+     * @throws \Exception
+     */
+    public function readAssoc(string $query, array $params_arr = [])
+    {
+        $statement_obj = $this->query($query, $params_arr);
+
+        $output_arr = [];
+
+        while (($row_arr = $statement_obj->fetch(\PDO::FETCH_ASSOC)) !== false) {
+            $output_arr[] = $row_arr;
+        }
+
+        return $output_arr;
+    }
+
+    /**
+     * @param string $query
      * @param array $params_arr
      * @return mixed
      * @throws \Exception
      */
-    public function readAssocRow($query, $params_arr = [])
+    public function readAssocRow(string $query, array $params_arr = [])
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -152,24 +171,24 @@ class DBService
     }
 
     /**
-     * @param $query
+     * @param string $query
      * @param array $params_arr
      * @return mixed|false
      * Возвращает false при ошибке, или если нет записей.
      * @throws \Exception
      */
-    public function readField($query, $params_arr = [])
+    public function readField(string $query, array $params_arr = [])
     {
         $statement_obj = $this->query($query, $params_arr);
         return $statement_obj->fetch(\PDO::FETCH_COLUMN);
     }
 
     /**
-     * @param $db_sequence_name
+     * @param string|null $db_sequence_name
      * @return string
      * @throws \Exception
      */
-    public function lastInsertId($db_sequence_name)
+    public function lastInsertId(string $db_sequence_name = null)
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {

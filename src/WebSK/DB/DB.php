@@ -71,10 +71,10 @@ class DB
     }
 
     /**
-     * @param $db_sequence_name
+     * @param string|null $db_sequence_name
      * @return string
      */
-    public function lastInsertId($db_sequence_name)
+    public function lastInsertId(string $db_sequence_name = null)
     {
         return $this->getPdoObj()->lastInsertId($db_sequence_name);
     }
