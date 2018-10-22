@@ -1,0 +1,10 @@
+{
+    "name": "websk/php-db",
+    "require": {
+        "ext-pdo": "*",
+        "websk/php-utils": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "": "src/" }
+    }
+}
