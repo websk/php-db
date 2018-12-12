@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a79e5499424007ecd0b66f2a11b79dee",
+    "content-hash": "e0aab7e087f942818affd90cd623b921",
     "packages": [
         {
-            "name": "websk/php-utils",
-            "version": "dev-master",
+            "name": "websk/php-config",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/websk/php-utils.git",
-                "reference": "e5c29b800bb277f50858d99239ae814ac85f832d"
+                "url": "https://github.com/websk/php-config.git",
+                "reference": "806f75eafc1536c2543f383875503f12c72bcfe3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websk/php-utils/zipball/e5c29b800bb277f50858d99239ae814ac85f832d",
-                "reference": "e5c29b800bb277f50858d99239ae814ac85f832d",
+                "url": "https://api.github.com/repos/websk/php-config/zipball/806f75eafc1536c2543f383875503f12c72bcfe3",
+                "reference": "806f75eafc1536c2543f383875503f12c72bcfe3",
                 "shasum": ""
             },
             "type": "library",
@@ -27,15 +27,41 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-07-02T14:12:58+00:00"
+            "description": "PHP configs wrapper",
+            "homepage": "https://websk.ru/",
+            "time": "2018-12-03T15:24:53+00:00"
+        },
+        {
+            "name": "websk/php-utils",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websk/php-utils.git",
+                "reference": "e6a4861c8a918fb9953b0c4e46072d765fbd592b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/websk/php-utils/zipball/e6a4861c8a918fb9953b0c4e46072d765fbd592b",
+                "reference": "e6a4861c8a918fb9953b0c4e46072d765fbd592b",
+                "shasum": ""
+            },
+            "require": {
+                "websk/php-config": "1.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2018-12-10T19:13:25+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "websk/php-utils": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

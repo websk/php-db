@@ -1,6 +1,6 @@
 <?php
 
-namespace Websk\DB;
+namespace WebSK\DB;
 
 /**
  * Class DB
