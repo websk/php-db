@@ -2,6 +2,10 @@
 
 namespace WebSK\DB;
 
+/**
+ * Class DBService
+ * @package WebSK\DB
+ */
 class DBService
 {
     /** @var DB */

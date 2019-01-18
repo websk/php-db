@@ -2,6 +2,10 @@
 
 namespace WebSK\DB;
 
+/**
+ * Class DBConnectorMySQL
+ * @package WebSK\DB
+ */
 class DBConnectorMySQL implements DBConnectorInterface
 {
     /** @var string */
