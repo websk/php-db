@@ -2,118 +2,115 @@
 
 namespace WebSK\DB;
 
-use WebSK\Slim\Container;
-
 /**
  * Class DBWrapper
- * @package DB
+ * @package WebSK\DB
  */
 class DBWrapper
 {
+    protected static $db_service;
+
     /**
      * @return DBService
      */
-    public static function getDBService(string $db_service_container_id)
+    public static function getDBService()
     {
-        $container = Container::self();
-
-        /** @var DBService $db_service */
-        return $container->get($db_service_container_id);
+        return self::$db_service;
     }
 
     /**
-     * @param string $db_service_container_id
+     * @param mixed $db_service
+     */
+    public static function setDbService($db_service): void
+    {
+        self::$db_service = $db_service;
+    }
+
+    /**
      * @param string $query
      * @param array $params_arr
      * @return \PDOStatement
      * @throws \Exception
      */
-    public static function query(string $db_service_container_id, string $query, $params_arr = array())
+    public static function query(string $query, $params_arr = array())
     {
-        return self::getDBService($db_service_container_id)->query($query, $params_arr);
+        return self::getDBService()->query($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @param string $field_name_for_keys
      * @return array
      * @throws \Exception
      */
-    public static function readObjects(string $db_service_container_id, string $query, array $params_arr = [], string $field_name_for_keys = '')
+    public static function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = '')
     {
-        return self::getDBService($db_service_container_id)->readObjects($query, $params_arr, $field_name_for_keys);
+        return self::getDBService()->readObjects($query, $params_arr, $field_name_for_keys);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @return mixed
      * @throws \Exception
      */
-    public static function readObject(string $db_service_container_id, string $query, array $params_arr = [])
+    public static function readObject(string $query, array $params_arr = [])
     {
-        return self::getDBService($db_service_container_id)->readObject($query, $params_arr);
+        return self::getDBService()->readObject($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @return array
      * @throws \Exception
      */
-    public static function readAssoc(string $db_service_container_id, string $query, array $params_arr = [])
+    public static function readAssoc(string $query, array $params_arr = [])
     {
-        return self::getDBService($db_service_container_id)->readAssoc($query, $params_arr);
+        return self::getDBService()->readAssoc($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @return array
      * @throws \Exception
      */
-    public static function readColumn(string $db_service_container_id, string $query, array $params_arr = [])
+    public static function readColumn(string $query, array $params_arr = [])
     {
-        return self::getDBService($db_service_container_id)->readColumn($query, $params_arr);
+        return self::getDBService()->readColumn($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @return mixed
      * @throws \Exception
      */
-    public static function readAssocRow(string $db_service_container_id, string $query, array $params_arr = [])
+    public static function readAssocRow(string $query, array $params_arr = [])
     {
-        return self::getDBService($db_service_container_id)->readAssocRow($query, $params_arr);
+        return self::getDBService()->readAssocRow($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $query
      * @param array $params_arr
      * @return false|mixed
      * @throws \Exception
      */
-    public static function readField(string $db_service_container_id, string $query, array $params_arr = [])
+    public static function readField(string $query, array $params_arr = [])
     {
-        return self::getDBService($db_service_container_id)->readField($query, $params_arr);
+        return self::getDBService()->readField($query, $params_arr);
     }
 
     /**
-     * @param string $db_service_container_id
      * @param string $db_sequence_name
      * @return string
      * @throws \Exception
      */
-    public static function lastInsertId(string $db_service_container_id, string $db_sequence_name = '')
+    public static function lastInsertId(string $db_sequence_name = '')
     {
-        return self::getDBService($db_service_container_id)->lastInsertId($db_sequence_name);
+        return self::getDBService()->lastInsertId($db_sequence_name);
     }
 }

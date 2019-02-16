@@ -41,3 +41,10 @@ $container['db_service'] = function (ContainerInterface $container) {
     return new DBService($db_connector, $db_settings);
 };
 ```
+
+## Use DBWrapper
+
+Set DBWrapper db service in App
+```
+DBWrapper::setDbService($container->get('DB_SERVICE_CONTAINER_ID'));
+```
