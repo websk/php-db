@@ -8,6 +8,7 @@ namespace WebSK\DB;
  */
 class DBWrapper
 {
+    /** @var DBService */
     protected static $db_service;
 
     /**
@@ -19,9 +20,9 @@ class DBWrapper
     }
 
     /**
-     * @param mixed $db_service
+     * @param DBService $db_service
      */
-    public static function setDbService($db_service): void
+    public static function setDbService(DBService $db_service): void
     {
         self::$db_service = $db_service;
     }

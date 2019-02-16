@@ -124,7 +124,7 @@ class DBService
     }
 
     /**
-     * @param $query
+     * @param string $query
      * @param array $params_arr
      * @return array
      * @throws \Exception
