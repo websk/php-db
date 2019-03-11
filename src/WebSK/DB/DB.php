@@ -52,6 +52,8 @@ class DB
                 $param_type = \PDO::PARAM_NULL;
             } elseif (is_string($param_value)) {
                 $param_type = \PDO::PARAM_STR;
+            } elseif (is_float($param_value)) {
+                $param_type = \PDO::PARAM_STR;
             } else {
                 throw new \Exception('unknown param type');
             }
