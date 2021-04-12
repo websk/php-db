@@ -3,7 +3,29 @@
 use GetOpt\GetOpt;
 use WebSK\Utils\Assert;
 
-require_once realpath(__DIR__ . '/../vendor/autoload.php');
+$autoloader  = function () {
+    $files = [
+        __DIR__ . '/../../../autoload.php', // composer dependency
+        __DIR__ . '/../vendor/autoload.php', // stand-alone package
+    ];
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            require_once $file;
+
+            return true;
+        }
+    }
+
+    return false;
+};
+
+if (!$autoloader()) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'curl -sS https://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
 
 $settings_arr = \WebSK\Config\ConfWrapper::value('settings');
 $db_settings_arr = $settings_arr['db'] ?? [];

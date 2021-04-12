@@ -10,5 +10,8 @@
     },
     "autoload": {
         "psr-4": { "": "src/" }
-    }
+    },
+    "bin": [
+        "bin/websk_db_migration.php"
+    ]
 }
