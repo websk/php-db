@@ -20,26 +20,12 @@ $config = [
 ## Registering a service
 
 ```
-/**
- * @param ContainerInterface $container
- * @return DBService
- */
-$container['db_service'] = function (ContainerInterface $container) {
-    $db_config = $container['settings']['db']['db_skif'];
+$container->set('DB_SERVICE_CONTAINER_ID', function (ContainerInterface $container) {
+    $settings = $container->get('settings');
+    $db_config = $settings['db']['db_skif'];
 
-    $db_connector = new DBConnectorMySQL(
-        $db_config['host'],
-        $db_config['db_name'],
-        $db_config['user'],
-        $db_config['password']
-    );
-
-    $db_settings = new DBSettings(
-        'mysql'
-    );
-
-    return new DBService($db_connector, $db_settings);
-};
+    return new DBServiceFactory::factoryMySQL($db_config);
+});
 ```
 
 ## Use DBWrapper

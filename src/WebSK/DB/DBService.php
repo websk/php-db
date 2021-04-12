@@ -8,12 +8,11 @@ namespace WebSK\DB;
  */
 class DBService
 {
-    /** @var DB */
-    protected $db_connections;
-    /** @var DBSettings */
-    protected $db_settings;
-    /** @var DBConnectorInterface */
-    protected $db_connector;
+    protected DB $db_connections;
+
+    protected DBSettings $db_settings;
+
+    protected DBConnectorInterface $db_connector;
 
     /**
      * DBService constructor.
@@ -30,7 +29,7 @@ class DBService
      * @return DB
      * @throws \Exception
      */
-    public function getDB()
+    public function getDB(): DB
     {
         if (isset($this->db_connections)) {
             return $this->db_connections;
@@ -52,7 +51,7 @@ class DBService
     /**
      * @return string
      */
-    public function getDbName()
+    public function getDbName(): string
     {
         return $this->db_connector->getDbName();
     }
@@ -64,7 +63,7 @@ class DBService
      * @return \PDOStatement
      * @throws \Exception
      */
-    public function query(string $query, array $params_arr = [])
+    public function query(string $query, array $params_arr = []): \PDOStatement
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -92,7 +91,7 @@ class DBService
      * @return array
      * @throws \Exception
      */
-    public function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = '')
+    public function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = ''): array
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -129,7 +128,7 @@ class DBService
      * @return array
      * @throws \Exception
      */
-    public function readColumn(string $query, array $params_arr = [])
+    public function readColumn(string $query, array $params_arr = []): array
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -148,7 +147,7 @@ class DBService
      * @return array
      * @throws \Exception
      */
-    public function readAssoc(string $query, array $params_arr = [])
+    public function readAssoc(string $query, array $params_arr = []): array
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -192,7 +191,7 @@ class DBService
      * @return string
      * @throws \Exception
      */
-    public function lastInsertId(string $db_sequence_name = null)
+    public function lastInsertId(string $db_sequence_name = null): string
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -206,7 +205,7 @@ class DBService
      * @return bool
      * @throws \Exception
      */
-    public function beginTransaction()
+    public function beginTransaction(): bool
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -220,7 +219,7 @@ class DBService
      * @return bool
      * @throws \Exception
      */
-    public function inTransaction()
+    public function inTransaction(): bool
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -234,7 +233,7 @@ class DBService
      * @return bool
      * @throws \Exception
      */
-    public function commitTransaction()
+    public function commitTransaction(): bool
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
@@ -248,7 +247,7 @@ class DBService
      * @return bool
      * @throws \Exception
      */
-    public function rollBackTransaction()
+    public function rollBackTransaction(): bool
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {

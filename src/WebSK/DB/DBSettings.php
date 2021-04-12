@@ -8,10 +8,9 @@ namespace WebSK\DB;
  */
 class DBSettings
 {
-    /** @var string */
-    protected $sql_file_path = '';
-    /** @var string */
-    protected $db_connector_id;
+    protected string $sql_file_path = '';
+
+    protected string $db_connector_id;
 
     /**
      * DBSettings constructor.
@@ -27,7 +26,7 @@ class DBSettings
     /**
      * @return string
      */
-    public function getDbConnectorId()
+    public function getDbConnectorId(): string
     {
         return $this->db_connector_id;
     }
@@ -43,7 +42,7 @@ class DBSettings
     /**
      * @return string
      */
-    public function getSqlFilePath()
+    public function getSqlFilePath(): string
     {
         return $this->sql_file_path;
     }

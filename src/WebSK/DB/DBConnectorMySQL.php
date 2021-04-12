@@ -8,18 +8,17 @@ namespace WebSK\DB;
  */
 class DBConnectorMySQL implements DBConnectorInterface
 {
-    /** @var string */
-    protected $server_host;
-    /** @var string */
-    protected $db_name;
-    /** @var string */
-    protected $user;
-    /** @var string */
-    protected $password;
-    /** @var \PDO */
-    protected $pdo_obj = null;
-    /** @var bool */
-    protected $pdo_is_connected = false;
+    protected string $server_host;
+
+    protected string $db_name;
+
+    protected string $user;
+
+    protected string $password;
+
+    protected ?\PDO $pdo_obj = null;
+
+    protected bool $pdo_is_connected = false;
 
     /**
      * DBConnectorMySQL constructor.
@@ -39,7 +38,7 @@ class DBConnectorMySQL implements DBConnectorInterface
     /**
      * @return string
      */
-    public function getDbName()
+    public function getDbName(): string
     {
         return $this->db_name;
     }
@@ -48,7 +47,7 @@ class DBConnectorMySQL implements DBConnectorInterface
      * Подключается к серверу при первом обращении за объектом PDO.
      * @return \PDO
      */
-    public function getPdoObj()
+    public function getPdoObj(): \PDO
     {
         if ($this->pdo_is_connected) {
             return $this->pdo_obj;

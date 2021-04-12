@@ -8,7 +8,13 @@ namespace WebSK\DB;
  */
 interface DBConnectorInterface
 {
-    public function getPdoObj();
+    /**
+     * @return \PDO
+     */
+    public function getPdoObj(): \PDO;
 
-    public function getDbName();
+    /**
+     * @return string
+     */
+    public function getDbName(): string;
 }

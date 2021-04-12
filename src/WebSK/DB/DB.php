@@ -4,20 +4,16 @@ namespace WebSK\DB;
 
 /**
  * Class DB
- * @package DB
+ * @package WebSK\DB
  * Represents a single database connection.
  */
 class DB
 {
-    /**
-     * Throws PDOException on failure.
-     * @var \PDO|null
-     */
-    protected $pdo_obj = null;
+    protected ?\PDO $pdo_obj = null;
 
     /**
      * DB constructor.
-     * Умеет ииспользовать объект PDO из указанного DBConnector
+     * Умеет использовать объект PDO из указанного DBConnector
      * (при этом можно использовать одно подключение для нескольких объектов БД
      * если они смотрят на одну физическую базу, чтобы правильно работали транзакции)
      * @param DBConnectorInterface $db_connector_obj
@@ -30,12 +26,12 @@ class DB
 
     /**
      * Throws PDOException on failure.
-     * @param $query
+     * @param string $query
      * @param array $params_arr
      * @return \PDOStatement
      * @throws \Exception
      */
-    public function query($query, $params_arr = array())
+    public function query(string $query, array $params_arr = []): \PDOStatement
     {
         $statement_obj = $this->getPdoObj()->prepare($query);
 
@@ -76,7 +72,7 @@ class DB
      * @param string|null $db_sequence_name
      * @return string
      */
-    public function lastInsertId(string $db_sequence_name = null)
+    public function lastInsertId(string $db_sequence_name = null): string
     {
         return $this->getPdoObj()->lastInsertId($db_sequence_name);
     }
@@ -84,7 +80,7 @@ class DB
     /**
      * @return bool
      */
-    public function inTransaction()
+    public function inTransaction(): bool
     {
         return $this->getPdoObj()->inTransaction();
     }
@@ -92,7 +88,7 @@ class DB
     /**
      * @return bool
      */
-    public function beginTransaction()
+    public function beginTransaction(): bool
     {
         return $this->getPdoObj()->beginTransaction();
     }
@@ -100,7 +96,7 @@ class DB
     /**
      * @return bool
      */
-    public function commit()
+    public function commit(): bool
     {
         return $this->getPdoObj()->commit();
     }
@@ -108,7 +104,7 @@ class DB
     /**
      * @return bool
      */
-    public function rollBack()
+    public function rollBack(): bool
     {
         return $this->getPdoObj()->rollBack();
     }
@@ -116,7 +112,7 @@ class DB
     /**
      * @return null|\PDO
      */
-    public function getPdoObj()
+    public function getPdoObj(): ?\PDO
     {
         return $this->pdo_obj;
     }
@@ -124,7 +120,7 @@ class DB
     /**
      * @param null|\PDO $pdo_obj
      */
-    public function setPdoObj($pdo_obj)
+    public function setPdoObj(?\PDO $pdo_obj)
     {
         $this->pdo_obj = $pdo_obj;
     }

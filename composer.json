@@ -1,9 +1,12 @@
 {
     "name": "websk/php-db",
+    "description": "DB Service",
     "require": {
+        "php": "^7.4",
         "ext-pdo": "*",
+        "websk/php-config": "1.0.*",
         "websk/php-utils": "1.0.*",
-        "websk/php-slim": "1.0.*"
+        "ulrichsg/getopt-php": "^3.0"
     },
     "autoload": {
         "psr-4": { "": "src/" }
