@@ -1,7 +1,12 @@
+#!/usr/bin/env php
 <?php
 
 use GetOpt\GetOpt;
 use WebSK\Utils\Assert;
+
+if (PHP_SAPI !== 'cli') {
+    die('Only cli application!');
+}
 
 $autoloader  = function () {
     $files = [
@@ -18,19 +23,23 @@ $autoloader  = function () {
 
     return false;
 };
-
 if (!$autoloader()) {
-    die(
-        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
-        'curl -sS https://getcomposer.org/installer | php' . PHP_EOL .
-        'php composer.phar install' . PHP_EOL
-    );
+    die('autoload.php not found');
 }
 
-$settings_arr = \WebSK\Config\ConfWrapper::value('settings');
-$db_settings_arr = $settings_arr['db'] ?? [];
+$files = [
+    __DIR__ . '/../../../../config/config.php', // composer dependency
+    __DIR__ . '/../config/config.php', // stand-alone package
+];
+foreach ($files as $file) {
+    if (is_file($file)) {
+        $config = require_once $file;
+    }
+}
+Assert::assert(isset($config['settings']['db']), 'Empty config');
 
-Assert::assert(PHP_SAPI === 'cli', 'Only cli application!');
+$db_settings_arr = $config['settings']['db'] ?? [];
+
 
 $get_opt = new GetOpt();
 
@@ -42,12 +51,12 @@ $get_opt->addCommand(
     new \WebSK\DB\Console\MigrationHandleCommand($db_settings_arr)
 );
 
-$this->get_opt->process();
+$get_opt->process();
 
-$command = $this->get_opt->getCommand();
+$command = $get_opt->getCommand();
 if (!$command) {
-    echo $this->get_opt->getHelpText();
+    echo $get_opt->getHelpText();
     exit;
 }
 
-call_user_func($command->getHandler(), $this->get_opt);
+call_user_func($command->getHandler(), $get_opt);
