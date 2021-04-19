@@ -87,20 +87,21 @@
         },
         {
             "name": "websk/php-utils",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websk/php-utils.git",
-                "reference": "f63b782355d34ca39f5f15d72d91515581e93e0c"
+                "reference": "0e1df28fc1a62d2e20d7affe94b9a78cdce8b66a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websk/php-utils/zipball/f63b782355d34ca39f5f15d72d91515581e93e0c",
-                "reference": "f63b782355d34ca39f5f15d72d91515581e93e0c",
+                "url": "https://api.github.com/repos/websk/php-utils/zipball/0e1df28fc1a62d2e20d7affe94b9a78cdce8b66a",
+                "reference": "0e1df28fc1a62d2e20d7affe94b9a78cdce8b66a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "ext-mbstring": "*",
                 "php": "^7.4",
                 "websk/php-config": "1.0.*"
             },
@@ -111,11 +112,12 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "description": "PHP utils",
             "support": {
                 "issues": "https://github.com/websk/php-utils/issues",
-                "source": "https://github.com/websk/php-utils/tree/1.0.7"
+                "source": "https://github.com/websk/php-utils/tree/1.0.8"
             },
-            "time": "2021-02-04T13:46:06+00:00"
+            "time": "2021-04-14T07:03:48+00:00"
         }
     ],
     "packages-dev": [],
