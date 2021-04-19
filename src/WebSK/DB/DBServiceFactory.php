@@ -19,7 +19,7 @@ class DBServiceFactory
     {
         $db_settings = new DBSettings(
             'mysql',
-            $db_config['dump_file_path']
+            $db_config['dump_file_path'] ?? ''
         );
 
         return new DBService(

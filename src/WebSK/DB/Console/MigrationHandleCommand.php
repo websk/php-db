@@ -37,6 +37,10 @@ class MigrationHandleCommand extends Command
         foreach ($this->db_settings_arr as $db_id => $db_config) {
             echo "Database ID in application config: " . $db_id . "\n";
 
+            if (!isset($db_config['dump_file_path'])) {
+                echo "Unknown dump_file_path in DB config: " . $db_id . "\n";
+            }
+
             $migration_service = new MigrationService(
                 DBServiceFactory::factoryMySQL($db_config)
             );
