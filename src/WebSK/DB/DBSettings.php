@@ -2,10 +2,6 @@
 
 namespace WebSK\DB;
 
-/**
- * Class DBSettings
- * @package VitrinaTV\Core\DB
- */
 class DBSettings
 {
     protected string $sql_file_path = '';
