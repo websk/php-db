@@ -10,7 +10,7 @@ use WebSK\DB\DBService;
  */
 class MigrationService
 {
-    const EXECUTED_QUERIES_TABLE_NAME = 'db_executed_queries';
+    const string EXECUTED_QUERIES_TABLE_NAME = 'db_executed_queries';
 
     protected DBService $db_service;
 

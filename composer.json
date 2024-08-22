@@ -2,10 +2,10 @@
     "name": "websk/php-db",
     "description": "DB Service",
     "require": {
-        "php": "^7.4",
+        "php": "^8.3",
         "ext-pdo": "*",
-        "websk/php-config": "1.0.*",
-        "websk/php-utils": "1.0.*",
+        "websk/php-config": "2.0.*",
+        "websk/php-utils": "2.0.*",
         "ulrichsg/getopt-php": "^3.0"
     },
     "autoload": {

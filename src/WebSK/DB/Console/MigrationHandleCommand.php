@@ -12,10 +12,10 @@ use WebSK\Utils\Assert;
  */
 class MigrationHandleCommand extends Command
 {
-    const NAME = 'migrations:migration_handle';
+    const string NAME = 'migrations:migration_handle';
 
-    const COMMAND_SKIP_QUERY = 's';
-    const COMMAND_IGNORE_QUERY = 'i';
+    const string COMMAND_SKIP_QUERY = 's';
+    const string COMMAND_IGNORE_QUERY = 'i';
 
     protected array $db_settings_arr = [];
 
