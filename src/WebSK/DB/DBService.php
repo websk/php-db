@@ -187,11 +187,11 @@ class DBService
     }
 
     /**
-     * @param string|null $db_sequence_name
+     * @param ?string $db_sequence_name
      * @return string
      * @throws \Exception
      */
-    public function lastInsertId(string $db_sequence_name = null): string
+    public function lastInsertId(?string $db_sequence_name = null): string
     {
         $db_obj = $this->getDB();
         if (!$db_obj) {
