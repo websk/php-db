@@ -120,7 +120,7 @@ class DB
     /**
      * @param null|\PDO $pdo_obj
      */
-    public function setPdoObj(?\PDO $pdo_obj)
+    public function setPdoObj(?\PDO $pdo_obj): void
     {
         $this->pdo_obj = $pdo_obj;
     }

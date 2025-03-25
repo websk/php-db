@@ -40,7 +40,7 @@ class MigrationService
      * @param string $query
      * @throws \Exception
      */
-    public function markAsExecutedMigration(string $query)
+    public function markAsExecutedMigration(string $query): void
     {
         $this->db_service->query(
             'INSERT INTO ' . self::EXECUTED_QUERIES_TABLE_NAME . ' (created_at_ts, sql_query) VALUES (?, ?)',
@@ -52,7 +52,7 @@ class MigrationService
      * @param string $query
      * @throws \Exception
      */
-    public function executeMigration(string $query)
+    public function executeMigration(string $query): void
     {
         if (!$query) {
             return;
@@ -84,7 +84,7 @@ class MigrationService
     /**
      * @throws \Exception
      */
-    public function createMigrationTable()
+    public function createMigrationTable(): void
     {
         $this->db_service->query(
             'CREATE TABLE ' . self::EXECUTED_QUERIES_TABLE_NAME
@@ -134,7 +134,7 @@ class MigrationService
      * @param string $query
      * @throws \Exception
      */
-    public function addMigrationQuery(string $query)
+    public function addMigrationQuery(string $query): void
     {
         $queries_arr = $this->loadQueriesArrForDB();
 

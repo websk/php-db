@@ -55,7 +55,7 @@ class DBWrapper
      * @return mixed
      * @throws \Exception
      */
-    public static function readObject(string $query, array $params_arr = [])
+    public static function readObject(string $query, array $params_arr = []): mixed
     {
         return self::getDBService()->readObject($query, $params_arr);
     }
@@ -88,7 +88,7 @@ class DBWrapper
      * @return mixed
      * @throws \Exception
      */
-    public static function readAssocRow(string $query, array $params_arr = [])
+    public static function readAssocRow(string $query, array $params_arr = []): mixed
     {
         return self::getDBService()->readAssocRow($query, $params_arr);
     }
@@ -99,7 +99,7 @@ class DBWrapper
      * @return false|mixed
      * @throws \Exception
      */
-    public static function readField(string $query, array $params_arr = [])
+    public static function readField(string $query, array $params_arr = []): mixed
     {
         return self::getDBService()->readField($query, $params_arr);
     }

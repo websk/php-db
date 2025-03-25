@@ -30,7 +30,7 @@ class DBSettings
     /**
      * @param string $db_connector_id
      */
-    public function setDbConnectorId(string $db_connector_id)
+    public function setDbConnectorId(string $db_connector_id): void
     {
         $this->db_connector_id = $db_connector_id;
     }
@@ -46,7 +46,7 @@ class DBSettings
     /**
      * @param string $sql_file_path
      */
-    public function setSqlFilePath(string $sql_file_path)
+    public function setSqlFilePath(string $sql_file_path): void
     {
         $this->sql_file_path = $sql_file_path;
     }

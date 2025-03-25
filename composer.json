@@ -4,9 +4,7 @@
     "require": {
         "php": "^8.3",
         "ext-pdo": "*",
-        "websk/php-config": "2.0.*",
-        "websk/php-utils": "2.0.*",
-        "ulrichsg/getopt-php": "^3.0"
+        "ulrichsg/getopt-php": "^v4.0.4"
     },
     "autoload": {
         "psr-4": { "": "src/" }

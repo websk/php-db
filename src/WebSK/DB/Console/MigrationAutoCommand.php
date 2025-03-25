@@ -4,7 +4,6 @@ namespace WebSK\DB\Console;
 
 use GetOpt\Command;
 use WebSK\DB\DBServiceFactory;
-use WebSK\Utils\Assert;
 
 /**
  * Class MigrationAutoCommand
@@ -12,7 +11,7 @@ use WebSK\Utils\Assert;
  */
 class MigrationAutoCommand extends Command
 {
-    const NAME = 'migrations:migration_auto';
+    const string NAME = 'migrations:migration_auto';
 
     protected array $db_settings_arr = [];
 
@@ -27,9 +26,13 @@ class MigrationAutoCommand extends Command
         parent::__construct(self::NAME, [$this, 'execute']);
     }
 
-    public function execute()
+    public function execute(): void
     {
-        Assert::assert(!empty($this->db_settings_arr), 'No database entries in config');
+        if (empty($this->db_settings_arr)) {
+            throw new \Exception(
+                'No database entries in config'
+            );
+        }
 
         foreach ($this->db_settings_arr as $db_id => $db_config) {
             echo "Database ID in application config: " . $db_id . "\n";

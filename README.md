@@ -21,8 +21,9 @@ $config = [
 
 ```
 $container->set('DB_SERVICE_CONTAINER_ID', function (ContainerInterface $container) {
-    $settings = $container->get('settings');
-    $db_config = $settings['db']['db_skif'];
+    $db_config = $container->get(
+        'settings.db.db_skif'
+    );
 
     return new DBServiceFactory::factoryMySQL($db_config);
 });

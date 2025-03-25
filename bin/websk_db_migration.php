@@ -2,7 +2,6 @@
 <?php
 
 use GetOpt\GetOpt;
-use WebSK\Utils\Assert;
 
 if (PHP_SAPI !== 'cli') {
     die('Only cli application!');
@@ -36,7 +35,13 @@ foreach ($files as $file) {
         $config = require_once $file;
     }
 }
-Assert::assert(isset($config['settings']['db']), 'Empty config');
+
+if (!isset($config['settings']['db'])) {
+    throw new \Exception(
+        'Empty config'
+    );
+}
+
 
 $db_settings_arr = $config['settings']['db'] ?? [];
 

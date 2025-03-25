@@ -115,7 +115,7 @@ class DBService
      * @return mixed
      * @throws \Exception
      */
-    public function readObject(string $query, array $params_arr = [])
+    public function readObject(string $query, array $params_arr = []): mixed
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -166,7 +166,7 @@ class DBService
      * @return mixed
      * @throws \Exception
      */
-    public function readAssocRow(string $query, array $params_arr = [])
+    public function readAssocRow(string $query, array $params_arr = []): mixed
     {
         $statement_obj = $this->query($query, $params_arr);
 
@@ -180,7 +180,7 @@ class DBService
      * Возвращает false при ошибке, или если нет записей.
      * @throws \Exception
      */
-    public function readField(string $query, array $params_arr = [])
+    public function readField(string $query, array $params_arr = []): mixed
     {
         $statement_obj = $this->query($query, $params_arr);
         return $statement_obj->fetch(\PDO::FETCH_COLUMN);
