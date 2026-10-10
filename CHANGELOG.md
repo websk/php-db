@@ -9,9 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.0] - 2026-10-10
 
-This release supersedes 2.2.0. It publishes the same library changes under a
-major version because they include backward-incompatible API and behavior
-changes.
+This release uses a major version because it includes backward-incompatible
+API and behavior changes.
 
 ### Added
 
@@ -55,13 +54,6 @@ changes.
 - Migration files produced by `addMigrationQuery()` use line-delimited SQL
   instead of PHP array syntax.
 
-## [2.2.0] - 2026-10-10
-
-### Deprecated
-
-- Superseded by 3.0.0 because this release included backward-incompatible
-  changes. Consumers should upgrade to 3.0.0.
-
 ## [2.1.0] - 2025-03-25
 
 ### Changed
@@ -93,7 +85,6 @@ changes.
 
 [Unreleased]: https://github.com/websk/php-db/compare/3.0.0...HEAD
 [3.0.0]: https://github.com/websk/php-db/compare/2.1.0...3.0.0
-[2.2.0]: https://github.com/websk/php-db/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/websk/php-db/compare/2.0.1...2.1.0
 [2.0.1]: https://github.com/websk/php-db/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/websk/php-db/compare/1.3.2...2.0.0
