@@ -1,15 +1,46 @@
 {
     "name": "websk/php-db",
-    "description": "DB Service",
+    "description": "DB Service library",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^8.3",
         "ext-pdo": "*",
         "ulrichsg/getopt-php": "^v4.0.4"
     },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.5"
+    },
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": {
+            "WebSK\\": "src/WebSK/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WebSK\\DB\\Tests\\": "tests/"
+        }
     },
     "bin": [
         "bin/websk_db_migration.php"
-    ]
+    ],
+    "archive": {
+        "exclude": [
+            "/dist",
+            "/vendor",
+            "/.idea",
+            "/.phpunit.cache"
+        ]
+    },
+    "scripts": {
+        "lint": "find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --no-progress --debug",
+        "check": [
+            "@lint",
+            "@test",
+            "@phpstan"
+        ]
+    }
 }

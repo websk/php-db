@@ -9,7 +9,7 @@ namespace WebSK\DB;
  */
 class DB
 {
-    protected ?\PDO $pdo_obj = null;
+    protected \PDO $pdo_obj;
 
     /**
      * DB constructor.
@@ -27,13 +27,16 @@ class DB
     /**
      * Throws PDOException on failure.
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @return \PDOStatement
      * @throws \Exception
      */
     public function query(string $query, array $params_arr = []): \PDOStatement
     {
         $statement_obj = $this->getPdoObj()->prepare($query);
+        if ($statement_obj === false) {
+            throw new \PDOException('query prepare failed');
+        }
 
         foreach ($params_arr as $key => $param_value) {
             if (is_object($param_value)) {
@@ -58,7 +61,9 @@ class DB
                 $key = $key + 1; // For a prepared statement using question mark placeholders, this will be the 1-indexed position of the parameter.
             }
 
-            $statement_obj->bindValue($key, $param_value, $param_type);
+            if (!$statement_obj->bindValue($key, $param_value, $param_type)) {
+                throw new \PDOException('parameter binding failed');
+            }
         }
 
         if (!$statement_obj->execute()) {
@@ -74,7 +79,12 @@ class DB
      */
     public function lastInsertId(?string $db_sequence_name = null): string
     {
-        return $this->getPdoObj()->lastInsertId($db_sequence_name);
+        $last_insert_id = $this->getPdoObj()->lastInsertId($db_sequence_name);
+        if ($last_insert_id === false) {
+            throw new \RuntimeException('lastInsertId failed');
+        }
+
+        return $last_insert_id;
     }
 
     /**
@@ -110,17 +120,17 @@ class DB
     }
 
     /**
-     * @return null|\PDO
+     * @return \PDO
      */
-    public function getPdoObj(): ?\PDO
+    public function getPdoObj(): \PDO
     {
         return $this->pdo_obj;
     }
 
     /**
-     * @param null|\PDO $pdo_obj
+     * @param \PDO $pdo_obj
      */
-    public function setPdoObj(?\PDO $pdo_obj): void
+    public function setPdoObj(\PDO $pdo_obj): void
     {
         $this->pdo_obj = $pdo_obj;
     }

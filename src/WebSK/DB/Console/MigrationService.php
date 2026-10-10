@@ -61,7 +61,12 @@ class MigrationService
         try {
             $this->db_service->query($query);
         } catch (\Throwable $e) {
-            throw new \Exception(sprintf('Error in: %s',$query), $e->getCode(), $e);
+            $exception_code = $e->getCode();
+            throw new \Exception(
+                sprintf('Error in: %s', $query),
+                is_int($exception_code) ? $exception_code : 0,
+                $e
+            );
         }
 
         $this->db_service->query(
@@ -71,7 +76,7 @@ class MigrationService
     }
 
     /**
-     * @return array
+     * @return list<string>
      * @throws \Exception
      */
     public function getExecutedQueriesArr(): array
@@ -105,7 +110,7 @@ class MigrationService
     }
 
     /**
-     * @return array
+     * @return list<string>
      * @throws \Exception
      */
     public function loadQueriesArrForDB(): array
@@ -126,6 +131,9 @@ class MigrationService
         }
 
         $queries_arr = preg_split('/\R/', $sql_file_str, -1, PREG_SPLIT_NO_EMPTY);
+        if ($queries_arr === false) {
+            throw new \RuntimeException('Failed to split migrations file content.');
+        }
 
         return $queries_arr;
     }
@@ -140,17 +148,10 @@ class MigrationService
 
         $queries_arr[] = $query;
 
-        $exported_arr = "array(\n";
-        foreach ($queries_arr as $query) {
-            $query = str_replace('\'', '\\\'', $query);
-            $exported_arr .= '\'' . $query . '\',' . "\n";
-        }
-        $exported_arr .= ")\n";
-
-
         $filename = $this->getMigrationFilename();
 
-        if (file_put_contents($filename, $exported_arr) === false) {
+        $file_contents = implode(PHP_EOL, $queries_arr) . PHP_EOL;
+        if (file_put_contents($filename, $file_contents) === false) {
             throw new \Exception('File "' . $filename . '" put failed.');
         }
     }

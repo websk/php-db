@@ -18,8 +18,6 @@ class DBConnectorMySQL implements DBConnectorInterface
 
     protected ?\PDO $pdo_obj = null;
 
-    protected bool $pdo_is_connected = false;
-
     /**
      * DBConnectorMySQL constructor.
      * @param string $server_host
@@ -49,7 +47,7 @@ class DBConnectorMySQL implements DBConnectorInterface
      */
     public function getPdoObj(): \PDO
     {
-        if ($this->pdo_is_connected) {
+        if ($this->pdo_obj instanceof \PDO) {
             return $this->pdo_obj;
         }
 
@@ -58,7 +56,6 @@ class DBConnectorMySQL implements DBConnectorInterface
         $pdo_obj->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 
         $this->pdo_obj = $pdo_obj;
-        $this->pdo_is_connected = true;
 
         return $this->pdo_obj;
     }

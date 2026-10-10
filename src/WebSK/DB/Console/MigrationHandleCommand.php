@@ -16,11 +16,12 @@ class MigrationHandleCommand extends Command
     const string COMMAND_SKIP_QUERY = 's';
     const string COMMAND_IGNORE_QUERY = 'i';
 
+    /** @var array<string, array<string, string>> */
     protected array $db_settings_arr = [];
 
     /**
      * MigrationCommand constructor.
-     * @param array $db_settings_arr
+     * @param array<string, array<string, string>> $db_settings_arr
      */
     public function __construct(array $db_settings_arr)
     {
@@ -119,7 +120,6 @@ class MigrationHandleCommand extends Command
 
                 default:
                     throw new \Exception('unknown command');
-                    break;
             }
         }
     }
@@ -139,6 +139,11 @@ class MigrationHandleCommand extends Command
     {
         echo "> ";
 
-        return trim(fgets(STDIN));
+        $answer = fgets(STDIN);
+        if ($answer === false) {
+            throw new \RuntimeException('Failed to read from STDIN');
+        }
+
+        return trim($answer);
     }
 }

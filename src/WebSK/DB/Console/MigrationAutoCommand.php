@@ -13,11 +13,12 @@ class MigrationAutoCommand extends Command
 {
     const string NAME = 'migrations:migration_auto';
 
+    /** @var array<string, array<string, string>> */
     protected array $db_settings_arr = [];
 
     /**
      * MigrationAutoCommand constructor.
-     * @param array $db_settings_arr
+     * @param array<string, array<string, string>> $db_settings_arr
      */
     public function __construct(array $db_settings_arr)
     {
@@ -53,7 +54,7 @@ class MigrationAutoCommand extends Command
      * @param MigrationService $migration_service
      * @throws \Exception
      */
-    protected function autoProcessDB(MigrationService $migration_service)
+    protected function autoProcessDB(MigrationService $migration_service): void
     {
         $error = $migration_service->checkConnectDBAndReturnError();
         if ($error != '') {

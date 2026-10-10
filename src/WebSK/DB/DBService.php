@@ -59,16 +59,13 @@ class DBService
     /**
      *
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @return \PDOStatement
      * @throws \Exception
      */
     public function query(string $query, array $params_arr = []): \PDOStatement
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         try {
             return $db_obj->query($query, $params_arr);
@@ -80,15 +77,20 @@ class DBService
                 $uri = "\r\nUrl: " . $_SERVER['REQUEST_URI'];
             }
 
-            throw new \PDOException($uri . "\r\n" . $e->getMessage());
+            $exception_code = $e->getCode();
+            throw new \PDOException(
+                $uri . "\r\n" . $e->getMessage(),
+                is_int($exception_code) ? $exception_code : 0,
+                $e
+            );
         }
     }
 
     /**
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @param string $field_name_for_keys
-     * @return array
+     * @return array<int|string, object>
      * @throws \Exception
      */
     public function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = ''): array
@@ -111,8 +113,8 @@ class DBService
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return mixed
+     * @param array<int|string, mixed> $params_arr
+     * @return object|false
      * @throws \Exception
      */
     public function readObject(string $query, array $params_arr = []): mixed
@@ -124,8 +126,8 @@ class DBService
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return array
+     * @param array<int|string, mixed> $params_arr
+     * @return list<mixed>
      * @throws \Exception
      */
     public function readColumn(string $query, array $params_arr = []): array
@@ -143,8 +145,8 @@ class DBService
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return array
+     * @param array<int|string, mixed> $params_arr
+     * @return list<array<string, mixed>>
      * @throws \Exception
      */
     public function readAssoc(string $query, array $params_arr = []): array
@@ -162,8 +164,8 @@ class DBService
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return mixed
+     * @param array<int|string, mixed> $params_arr
+     * @return array<string, mixed>|false
      * @throws \Exception
      */
     public function readAssocRow(string $query, array $params_arr = []): mixed
@@ -175,7 +177,7 @@ class DBService
 
     /**
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @return mixed|false
      * Возвращает false при ошибке, или если нет записей.
      * @throws \Exception
@@ -194,9 +196,6 @@ class DBService
     public function lastInsertId(?string $db_sequence_name = null): string
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         return $db_obj->lastInsertId($db_sequence_name);
     }
@@ -208,9 +207,6 @@ class DBService
     public function beginTransaction(): bool
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         return $db_obj->beginTransaction();
     }
@@ -222,9 +218,6 @@ class DBService
     public function inTransaction(): bool
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         return $db_obj->inTransaction();
     }
@@ -236,9 +229,6 @@ class DBService
     public function commitTransaction(): bool
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         return $db_obj->commit();
     }
@@ -250,9 +240,6 @@ class DBService
     public function rollBackTransaction(): bool
     {
         $db_obj = $this->getDB();
-        if (!$db_obj) {
-            throw new \Exception('getDB failed');
-        }
 
         return $db_obj->rollBack();
     }

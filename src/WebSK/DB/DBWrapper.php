@@ -28,7 +28,7 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @return \PDOStatement
      * @throws \Exception
      */
@@ -39,9 +39,9 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @param string $field_name_for_keys
-     * @return array
+     * @return array<int|string, object>
      * @throws \Exception
      */
     public static function readObjects(string $query, array $params_arr = [], string $field_name_for_keys = ''): array
@@ -51,8 +51,8 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return mixed
+     * @param array<int|string, mixed> $params_arr
+     * @return object|false
      * @throws \Exception
      */
     public static function readObject(string $query, array $params_arr = []): mixed
@@ -62,8 +62,8 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return array
+     * @param array<int|string, mixed> $params_arr
+     * @return list<array<string, mixed>>
      * @throws \Exception
      */
     public static function readAssoc(string $query, array $params_arr = []): array
@@ -73,8 +73,8 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return array
+     * @param array<int|string, mixed> $params_arr
+     * @return list<mixed>
      * @throws \Exception
      */
     public static function readColumn(string $query, array $params_arr = []): array
@@ -84,8 +84,8 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
-     * @return mixed
+     * @param array<int|string, mixed> $params_arr
+     * @return array<string, mixed>|false
      * @throws \Exception
      */
     public static function readAssocRow(string $query, array $params_arr = []): mixed
@@ -95,7 +95,7 @@ class DBWrapper
 
     /**
      * @param string $query
-     * @param array $params_arr
+     * @param array<int|string, mixed> $params_arr
      * @return false|mixed
      * @throws \Exception
      */
@@ -105,11 +105,11 @@ class DBWrapper
     }
 
     /**
-     * @param string $db_sequence_name
+     * @param ?string $db_sequence_name
      * @return string
      * @throws \Exception
      */
-    public static function lastInsertId(string $db_sequence_name = ''): string
+    public static function lastInsertId(?string $db_sequence_name = null): string
     {
         return self::getDBService()->lastInsertId($db_sequence_name);
     }
